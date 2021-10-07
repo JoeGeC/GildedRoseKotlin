@@ -11,15 +11,12 @@ class GildedRose(var items: Array<Item>) {
                 if (item.name != sulfuras)
                     reduceQuality(item)
             } else {
-                if (item.quality < 50) {
-                    item.quality++
-
-                    if (itemIsBackstage(item)) {
-                        if (item.sellIn < 11)
-                            increaseQuality(item)
-                        if (item.sellIn < 6)
-                            increaseQuality(item)
-                    }
+                increaseQuality(item)
+                if (itemIsBackstage(item)) {
+                    if (item.sellIn < 11)
+                        increaseQuality(item)
+                    if (item.sellIn < 6)
+                        increaseQuality(item)
                 }
             }
 
