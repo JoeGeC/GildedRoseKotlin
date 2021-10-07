@@ -3,33 +3,23 @@ private const val minQualityValue = 0
 private const val maximumQualityValue = 50
 
 fun Item.zeroQualityIfOutOfDate() {
-    if (sellIn < 0) {
-        quality = 0
-    }
+    if (sellIn < 0) quality = 0
 }
 
 fun Item.increaseQualityIfAlmostOutOfDate() {
-    if (sellIn < 6) {
-        increaseQuality()
-    }
+    if (sellIn < 6) increaseQuality()
 }
 
 fun Item.increaseQualityIfApproachingSellBy() {
-    if (sellIn < 11) {
-        increaseQuality()
-    }
+    if (sellIn < 11) increaseQuality()
 }
 
 fun Item.increaseQualityIfOutOfDate() {
-    if (sellIn < 0) {
-        increaseQuality()
-    }
+    if (sellIn < 0) increaseQuality()
 }
 
 fun Item.decreaseQualityIfOutOfDate() {
-    if (sellIn < 0) {
-        decreaseQuality()
-    }
+    if (sellIn < 0) decreaseQuality()
 }
 
 fun Item.decreaseSellIn() {
