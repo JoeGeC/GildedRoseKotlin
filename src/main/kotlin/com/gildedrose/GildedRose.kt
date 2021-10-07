@@ -11,6 +11,7 @@ class GildedRose(var items: Array<Item>) {
             var i: GildedRoseItem? = null
             if(itemIsBackstage(item)) i = Backstage(item)
             if(itemIsBrie(item)) i = AgedBrie(item)
+            if(itemIsSulfuras(item)) i = Sulfuras(item)
             i?.update()
 
             if (itemIsGeneral(item))
@@ -19,10 +20,7 @@ class GildedRose(var items: Array<Item>) {
             if (itemIsGeneral(item))
                 item.sellIn--
 
-
-            if (itemIsSulfuras(item)) {
-                if (item.sellIn < 0) increaseQuality(item)
-            } else if (itemIsGeneral(item)) {
+            if (itemIsGeneral(item)) {
                 if (item.sellIn < 0) reduceQuality(item)
             }
         }
