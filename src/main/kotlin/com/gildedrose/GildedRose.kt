@@ -23,13 +23,11 @@ class GildedRose(var items: Array<Item>) {
             if (!itemIsSulfuras(item))
                 item.sellIn--
 
-            if (item.sellIn < 0) {
-                if (itemIsBackstage(item))
-                    item.quality = 0
-                if (!itemIsBrie(item) && !itemIsSulfuras(item))
-                    reduceQuality(item)
-                else increaseQuality(item)
-            }
+            if (itemIsBackstage(item))
+                if (item.sellIn < 0) item.quality = 0
+            if (itemIsBrie(item) || itemIsSulfuras(item)) {
+                if (item.sellIn < 0) increaseQuality(item)
+            } else if (item.sellIn < 0) reduceQuality(item)
         }
     }
 
@@ -40,7 +38,7 @@ class GildedRose(var items: Array<Item>) {
     private fun itemIsBackstage(item: Item) = item.name == backstage
 
     private fun reduceQuality(item: Item) {
-        if(item.quality > 0)
+        if (item.quality > 0)
             item.quality--
     }
 
