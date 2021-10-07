@@ -8,7 +8,7 @@ class GildedRose(var items: Array<Item>) {
     fun updateQuality() {
         items.forEach { item ->
             if (!itemIsBrie(item) && !itemIsBackstage(item)) {
-                if (item.quality > 0)
+                if (item.name != sulfuras)
                     reduceQuality(item)
             } else {
                 if (item.quality < 50) {
@@ -30,7 +30,7 @@ class GildedRose(var items: Array<Item>) {
                 if (!itemIsBrie(item)) {
                     if (itemIsBackstage(item))
                         item.quality = 0
-                    else if (item.quality > 0)
+                    else if (item.name != sulfuras)
                         reduceQuality(item)
                 } else increaseQuality(item)
             }
@@ -44,15 +44,13 @@ class GildedRose(var items: Array<Item>) {
     private fun itemIsBackstage(item: Item) = item.name == backstage
 
     private fun reduceQuality(item: Item) {
-        if (item.name != sulfuras) {
+        if(item.quality > 0)
             item.quality--
-        }
     }
 
     private fun increaseQuality(item: Item) {
-        if (item.quality < 50) {
+        if (item.quality < 50)
             item.quality++
-        }
     }
 
 }
