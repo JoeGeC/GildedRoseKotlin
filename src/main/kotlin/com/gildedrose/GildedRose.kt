@@ -28,7 +28,9 @@ class GildedRose(var items: Array<Item>) {
 
             if (itemIsBrie(item) || itemIsSulfuras(item)) {
                 if (item.sellIn < 0) increaseQuality(item)
-            } else if (item.sellIn < 0) reduceQuality(item)
+            } else if (itemIsBackstage(item) || itemIsGeneral(item)) {
+                if (item.sellIn < 0) reduceQuality(item)
+            }
         }
     }
 
