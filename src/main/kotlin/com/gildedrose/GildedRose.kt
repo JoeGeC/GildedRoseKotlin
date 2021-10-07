@@ -10,23 +10,23 @@ class GildedRose(var items: Array<Item>) {
             if (item.name != agedBrie && item.name != backstage) {
                 if (item.quality > 0) {
                     if (item.name != sulfuras) {
-                        item.quality = item.quality - 1
+                        item.quality--
                     }
                 }
             } else {
                 if (item.quality < 50) {
-                    item.quality = item.quality + 1
+                    item.quality++
 
                     if (item.name == backstage) {
                         if (item.sellIn < 11) {
                             if (item.quality < 50) {
-                                item.quality = item.quality + 1
+                                item.quality++
                             }
                         }
 
                         if (item.sellIn < 6) {
                             if (item.quality < 50) {
-                                item.quality = item.quality + 1
+                                item.quality++
                             }
                         }
                     }
@@ -34,7 +34,7 @@ class GildedRose(var items: Array<Item>) {
             }
 
             if (item.name != sulfuras) {
-                item.sellIn = item.sellIn - 1
+                item.sellIn--
             }
 
             if (item.sellIn < 0) {
@@ -42,15 +42,15 @@ class GildedRose(var items: Array<Item>) {
                     if (item.name != backstage) {
                         if (item.quality > 0) {
                             if (item.name != sulfuras) {
-                                item.quality = item.quality - 1
+                                item.quality--
                             }
                         }
                     } else {
-                        item.quality = item.quality - item.quality
+                        item.quality = 0
                     }
                 } else {
                     if (item.quality < 50) {
-                        item.quality = item.quality + 1
+                        item.quality++
                     }
                 }
             }
