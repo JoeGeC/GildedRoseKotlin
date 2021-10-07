@@ -18,17 +18,10 @@ class GildedRose(var items: Array<Item>) {
                     item.quality++
 
                     if (item.name == backstage) {
-                        if (item.sellIn < 11) {
-                            if (item.quality < 50) {
-                                item.quality++
-                            }
-                        }
-
-                        if (item.sellIn < 6) {
-                            if (item.quality < 50) {
-                                item.quality++
-                            }
-                        }
+                        if (item.sellIn < 11)
+                            increaseQuality(item)
+                        if (item.sellIn < 6)
+                            increaseQuality(item)
                     }
                 }
             }
@@ -48,12 +41,14 @@ class GildedRose(var items: Array<Item>) {
                     } else {
                         item.quality = 0
                     }
-                } else {
-                    if (item.quality < 50) {
-                        item.quality++
-                    }
-                }
+                } else increaseQuality(item)
             }
+        }
+    }
+
+    private fun increaseQuality(item: Item) {
+        if (item.quality < 50) {
+            item.quality++
         }
     }
 
