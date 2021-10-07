@@ -8,11 +8,17 @@ class Backstage(val item: Item) {
             increaseQuality()
     }
 
+    fun reduceSellIn() { item.sellIn-- }
+
     private fun increaseQuality() {
         if (item.quality < 50) item.quality++
     }
 
-    private fun reduceQuality() {
+    fun resetQuality() {
+        if (item.sellIn < 0) item.quality = 0
+    }
+
+    fun reduceQuality() {
         if (item.quality > 0) item.quality--
     }
 }

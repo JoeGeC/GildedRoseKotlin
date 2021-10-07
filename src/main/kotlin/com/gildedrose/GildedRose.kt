@@ -16,18 +16,22 @@ class GildedRose(var items: Array<Item>) {
             if (itemIsGeneral(item))
                 reduceQuality(item)
 
-            if (i?.item?.name == backstage)
+            if (i?.item?.name == backstage){
                 i.updateQuality()
+                i.reduceSellIn()
+            }
 
-            if (itemIsBrie(item) || i?.item?.name == backstage || itemIsGeneral(item))
+            if (itemIsBrie(item) || itemIsGeneral(item))
                 item.sellIn--
 
             if (i?.item?.name == backstage)
-                if (item.sellIn < 0) item.quality = 0
+                i.resetQuality()
 
             if (itemIsBrie(item) || itemIsSulfuras(item)) {
                 if (item.sellIn < 0) increaseQuality(item)
-            } else if (i?.item?.name == backstage || itemIsGeneral(item)) {
+            } else if (i?.item?.name == backstage){
+                if (item.sellIn < 0) i.reduceQuality()
+            } else if (itemIsGeneral(item)) {
                 if (item.sellIn < 0) reduceQuality(item)
             }
         }
