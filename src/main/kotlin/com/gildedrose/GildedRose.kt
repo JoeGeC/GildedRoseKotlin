@@ -7,11 +7,10 @@ class GildedRose(var items: Array<Item>) {
 
     fun updateQuality() {
         items.forEach { item ->
-            if (!itemIsBrie(item) && !itemIsBackstage(item)) {
-                if (!itemIsSulfuras(item))
-                    reduceQuality(item)
-            } else
+            if (itemIsBrie(item) || itemIsBackstage(item))
                 increaseQuality(item)
+            else if (!itemIsSulfuras(item))
+                    reduceQuality(item)
 
             if (itemIsBackstage(item)) {
                 if (item.sellIn < 11)
