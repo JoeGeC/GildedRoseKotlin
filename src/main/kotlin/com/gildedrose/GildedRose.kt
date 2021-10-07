@@ -24,12 +24,11 @@ class GildedRose(var items: Array<Item>) {
                 item.sellIn--
 
             if (item.sellIn < 0) {
-                if (!itemIsBrie(item)) {
-                    if (itemIsBackstage(item))
-                        item.quality = 0
-                    else if (item.name != sulfuras)
-                        reduceQuality(item)
-                } else increaseQuality(item)
+                if (itemIsBackstage(item))
+                    item.quality = 0
+                if (!itemIsBrie(item) && !itemIsSulfuras(item))
+                    reduceQuality(item)
+                else increaseQuality(item)
             }
         }
     }
@@ -49,6 +48,5 @@ class GildedRose(var items: Array<Item>) {
         if (item.quality < 50)
             item.quality++
     }
-
 }
 
