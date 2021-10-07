@@ -7,17 +7,14 @@ class GildedRose(var items: Array<Item>) {
 
     fun updateQuality() {
         items.forEach { item ->
-            if (item.name != agedBrie && item.name != backstage) {
-                if (item.quality > 0) {
-                    if (item.name != sulfuras) {
-                        item.quality--
-                    }
-                }
+            if (!itemIsBrie(item) && !itemIsBackstage(item)) {
+                if (item.quality > 0)
+                    reduceQuality(item)
             } else {
                 if (item.quality < 50) {
                     item.quality++
 
-                    if (item.name == backstage) {
+                    if (itemIsBackstage(item)) {
                         if (item.sellIn < 11)
                             increaseQuality(item)
                         if (item.sellIn < 6)
@@ -26,23 +23,29 @@ class GildedRose(var items: Array<Item>) {
                 }
             }
 
-            if (item.name != sulfuras) {
+            if (!itemIsSulfuras(item))
                 item.sellIn--
-            }
 
             if (item.sellIn < 0) {
-                if (item.name != agedBrie) {
-                    if (item.name != backstage) {
-                        if (item.quality > 0) {
-                            if (item.name != sulfuras) {
-                                item.quality--
-                            }
-                        }
-                    } else {
+                if (!itemIsBrie(item)) {
+                    if (itemIsBackstage(item))
                         item.quality = 0
-                    }
+                    else if (item.quality > 0)
+                        reduceQuality(item)
                 } else increaseQuality(item)
             }
+        }
+    }
+
+    private fun itemIsBrie(item: Item) = item.name == agedBrie
+
+    private fun itemIsSulfuras(item: Item) = item.name == sulfuras
+
+    private fun itemIsBackstage(item: Item) = item.name == backstage
+
+    private fun reduceQuality(item: Item) {
+        if (item.name != sulfuras) {
+            item.quality--
         }
     }
 
