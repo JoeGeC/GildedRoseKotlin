@@ -4,13 +4,14 @@ class GildedRose(var items: Array<Item>) {
     private val agedBrie = "Aged Brie"
     private val sulfuras = "Sulfuras, Hand of Ragnaros"
     private val backstage = "Backstage passes to a TAFKAL80ETC concert"
+    private val general = "A general item"
 
     fun updateQuality() {
         items.forEach { item ->
             if (itemIsBrie(item) || itemIsBackstage(item))
                 increaseQuality(item)
-            else if (!itemIsSulfuras(item))
-                    reduceQuality(item)
+            if (itemIsGeneral(item))
+                reduceQuality(item)
 
             if (itemIsBackstage(item)) {
                 if (item.sellIn < 11)
@@ -19,7 +20,7 @@ class GildedRose(var items: Array<Item>) {
                     increaseQuality(item)
             }
 
-            if (!itemIsSulfuras(item))
+            if (itemIsBrie(item) || itemIsBackstage(item) || itemIsGeneral(item))
                 item.sellIn--
 
             if (itemIsBackstage(item))
@@ -30,6 +31,8 @@ class GildedRose(var items: Array<Item>) {
             } else if (item.sellIn < 0) reduceQuality(item)
         }
     }
+
+    private fun itemIsGeneral(item: Item): Boolean  = item.name == general
 
     private fun itemIsBrie(item: Item) = item.name == agedBrie
 
